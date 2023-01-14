@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# @st.cache
+@st.cache
 def price_per_neighborhood(post_info_df: pd.DataFrame):
     a = post_info_df.groupby(by='neighborhood').agg({
         'total_price': 'mean',
