@@ -1,17 +1,18 @@
 import streamlit as st
 import pandas as pd
-import data_analysis.data_preprocessing as dp
+import data_analysis.data_processing as dp
 from datetime import datetime
 from enum import Enum
 import numpy as np
 
 class PostProviderEnum(Enum):
-    agency = 0
+    both = 0
     personal = 1
-    both = 2
+    agency = 2
+
 
 class FilterStatus:
-    post_provider = PostProviderEnum.both
+    post_provider = PostProviderEnum.agency
     parking = False
     elevator = False
     storeroom = False
@@ -33,16 +34,20 @@ class LiveTablePageController:
         st.session_state['df'] = dp.load_data()
         self.creation_time = datetime.now()
 
+    def update_data(self):
+        st.session_state['df'] = dp.load_data()
+
     def get_df(self):
         return st.session_state['df']
 
     def apply_filter_df(self, filter: FilterStatus):
         filtered_df = self.get_df()
         if filter.post_provider == PostProviderEnum.agency: 
-            filtered_df = filtered_df[filtered_df['is_agency_pred'] == 1]
+            filtered_df = filtered_df[filtered_df['tag'] == 'agency']
+            print('agency')
         if filter.post_provider == PostProviderEnum.personal: 
-            filtered_df = filtered_df[filtered_df['is_agency_pred'] == 0]
-        
+            filtered_df = filtered_df[filtered_df['tag'] == 'personal']
+            print('personal')
         if filter.parking:
             filtered_df = filtered_df[filtered_df['parking'] == filter.parking]
         if filter.elevator:
@@ -53,20 +58,20 @@ class LiveTablePageController:
             filtered_df = filtered_df[filtered_df['balcony'] == filter.balcony]
 
         if filter.neighborhoods:
-            filtered_df = filtered_df[filtered_df['subtitle_neighborhood'].isin(filter.agency_names)]
+            filtered_df = filtered_df[filtered_df['subtitle_neighborhood'].isin(filter.neighborhoods)]
         if filter.agency_names:
             filtered_df = filtered_df[filtered_df['agency_name'].isin(filter.agency_names)]
 
         
         filtered_df = filtered_df[(filtered_df['crawl_timestamp'].dt.date >= filter.from_dt) & \
                                     (filtered_df['crawl_timestamp'].dt.date <= filter.to_dt)]
-        filtered_df = filtered_df[(filtered_df['total_price'] <= filter.to_price) & (filtered_df['total_price'] >= filter.from_price)]  
+        filtered_df = filtered_df[(filtered_df['total_price']*(10**-9) <= filter.to_price) & (filtered_df['total_price']*(10**-9) >= filter.from_price)]  
         filtered_df = filtered_df[(filtered_df['house_area'] <= filter.to_area) & (filtered_df['house_area'] >= filter.from_area)]
         
         return filtered_df
 
     def color_coding(self, row: pd.Series):
-            return ['background-color:#1f5c7a'] * len(row) if row.is_shakhsi > 0.5 else ['background-color:#303030'] * len(row)
+            return ['background-color:#1f5c7a'] * len(row) if row.is_shakhsi > 0.8 else ['background-color:#303030'] * len(row)
         
     def handle_apply_filter(self, filter: FilterStatus):
         if st.session_state['filter_mode']:
