@@ -45,7 +45,8 @@ st.sidebar.divider()
 
 st.sidebar.markdown("<h3 style='text-align: center; color: #36a9e1; margin-bottom: 20px; margin-top:0px;'> Total price range(Billions) </h3>", unsafe_allow_html=True)
 price_filter = st.sidebar.slider('Price', min_value=float(df['total_price'].min()*(10**-9)), max_value=float(df['total_price'].max()*(10**-9)) , step=0.01, value=[float(df['total_price'].min()*(10**-9)), float(df['total_price'].max()*(10**-9))], label_visibility='collapsed')
-st.sidebar.write('From', price_filter[0], 'billions, to ', price_filter[1], 'billions')
+st.sidebar.write('lowest total price: ', price_filter[0], 'billion')
+st.sidebar.write('highest total price: ', price_filter[1], 'billion')
 
 st.sidebar.divider()
 

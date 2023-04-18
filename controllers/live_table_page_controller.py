@@ -46,7 +46,7 @@ class LiveTablePageController:
             filtered_df = filtered_df[filtered_df['tag'] == 'agency']
             print('agency')
         if filter.post_provider == PostProviderEnum.personal: 
-            filtered_df = filtered_df[filtered_df['tag'] == 'personal']
+            filtered_df = filtered_df[filtered_df['tag'] == 'shakhsi']
             print('personal')
         if filter.parking:
             filtered_df = filtered_df[filtered_df['parking'] == filter.parking]
