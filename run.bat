@@ -1,1 +1,1 @@
-cmd "/c activate base && python -m streamlit run app.py"
+python -m streamlit run app.py
