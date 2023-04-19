@@ -1,0 +1,1 @@
+cmd "/c activate base && python -m streamlit run test/app.py"
