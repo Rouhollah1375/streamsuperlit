@@ -34,14 +34,10 @@ class SSTCore(Model):
             raise Exception(f'Cannot create the component {name}. view_cls or controller_cls are not properly provided.')
         self._components[id] = Component(name, id, view_class, controller_class)
 
-    # in Python 3.7 and above, it is guaranteed that the
-    # order of iteration over a dictionary is similar to the order of insertion
     def build_components(self, components_desc: list[dict]):
         for comp in components_desc:
             self.create_component(comp['name'], comp['view'], comp['controller'])
 
-    # in Python 3.7 and above, it is guaranteed that the
-    # order of iteration over a dictionary is similar to the order of insertion
     def render(self):
         for id, comp in self._components.items():
             comp.get_view().render()
