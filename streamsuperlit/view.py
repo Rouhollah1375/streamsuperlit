@@ -5,15 +5,13 @@ import datetime
 import streamlit as st
 
 class View(ABC):
-    def __new__(cls, id: str, controller: 'streamsuperlit.controller.Controller'):
+    def __new__(cls, id: str):
         if id not in st.session_state:
             st.session_state[id] = super(View, cls).__new__(cls)
         return st.session_state[id]
 
-    def __init__(self, id: str, controller: 'streamsuperlit.controller.Controller'):
+    def __init__(self, id: str):
         self._id = id
-        self._ctrl = controller
-        self._ctrl.register_view(self)
         self._inputs: list[object] = []
         self._outputs: list[Callable] = []
 
@@ -22,6 +20,9 @@ class View(ABC):
 
     def _handle_inputs(self):
         pass
+
+    def register_controller(self, controller: 'streamsuperlit.controller.Controller'):
+        self._ctrl = controller
 
     def render(self):
         self._handle_outputs()
