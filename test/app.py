@@ -7,7 +7,6 @@ import streamlit as st
 class MainPageController(Controller):
 
     def handle_button_click(self):
-        st.write(f'button clicked - {datetime.datetime.now()}')
         self._view.a += 1
         self._view.b = 'even' if self._view.a % 2 == 0 else 'odd'
     
@@ -20,7 +19,6 @@ class MainPageView(View):
         return super(MainPageView, cls).__new__(cls, id)
 
     def __init__(self, id: str):
-        st.write(f'view init {datetime.datetime.now()}')
         self.a = 10
         self.b = None
         self.is_email = None
@@ -40,18 +38,5 @@ class MainPageView(View):
         else:
             st.write('email is wrong')
 
-components = [
-    {
-        'name': 'c1',
-        'view': '__main__.MainPageView',
-        'controller': '__main__.MainPageController'
-    },
-    {
-        'name': 'c2',
-        'view': '__main__.MainPageView',
-        'controller': '__main__.MainPageController'
-    }
-]
-
-sst = SSTCore(components)
+sst = SSTCore(components_json='./test/components.json')
 sst.render()

@@ -1,0 +1,12 @@
+[
+    {
+        "name": "c1",
+        "view": "__main__.MainPageView",
+        "controller": "__main__.MainPageController"
+    },
+    {
+        "name": "c2",
+        "view": "__main__.MainPageView",
+        "controller": "__main__.MainPageController"
+    }
+]

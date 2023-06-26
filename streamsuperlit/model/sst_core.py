@@ -5,18 +5,22 @@ from streamsuperlit.component import Component
 from streamsuperlit.core.uuid import UUID
 from streamsuperlit.core.utils import get_class
 from collections import OrderedDict
-
+import json
 import streamlit as st
 
 class SSTCore(Model):
     SSTCORE_ID = 'sst-core'
-    def __new__(cls, components: list[dict]):
+    def __new__(cls, components: list[dict]=None, components_json: str=None):
         if SSTCore.SSTCORE_ID not in st.session_state:
             st.session_state[SSTCore.SSTCORE_ID] = super(SSTCore, cls).__new__(cls, SSTCore.SSTCORE_ID)
             st.session_state['core-init'] = False
         return st.session_state[SSTCore.SSTCORE_ID]
 
-    def __init__(self, components: list[dict]):
+    def __init__(self, components: list[dict]=None, components_json: str=None):
+        if components_json:
+            with open(components_json, 'r') as f:
+                components = json.load(f)
+
         if not st.session_state['core-init']:
             self._components = OrderedDict()
             self._uuid = UUID()
