@@ -11,6 +11,7 @@ class MainPageController(Controller):
         self._view.b = 'even' if self._view.a % 2 == 0 else 'odd'
     
     def is_email(self):
+        print(st.session_state)
         email = st.session_state[self._view._id+'3']
         self._view.is_email = '@' in email
 
@@ -37,6 +38,30 @@ class MainPageView(View):
             st.write('email is correct')
         else:
             st.write('email is wrong')
+
+class SmallComponentController(Controller):
+    pass
+
+class SmallComponentView(View):
+    import pandas as pd
+    def __new__(cls, id: str):
+        return super(SmallComponentView, cls).__new__(cls, id)
+
+    def __init__(self, id: str):
+        self.df = self.pd.DataFrame({
+            'id': ['assddf', 'wer', 'sdfxcv', 'rghgh', 'ertertccv'],
+            'balance': [1, -2, 12, 99, 54],
+            'name': ['ali', 'mammad', 'zahra', 'taghi', 'zak']
+        })
+        super().__init__(id)
+
+    def _view(self):
+        st.text('**small-component**\nThis component has two columns')
+        col1, col2 = st.columns(2)
+        with col1:
+            st.dataframe(self.df)
+        with col2:
+            st.line_chart(self.df.balance)
 
 sst = SSTCore(components_json='./test/components.json')
 sst.render()

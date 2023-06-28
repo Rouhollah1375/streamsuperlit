@@ -8,5 +8,10 @@
         "name": "c2",
         "view": "__main__.MainPageView",
         "controller": "__main__.MainPageController"
+    },
+    {
+        "name": "c3",
+        "view": "__main__.SmallComponentView",
+        "controller": "__main__.SmallComponentController"
     }
 ]
