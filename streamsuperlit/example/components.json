@@ -1,0 +1,17 @@
+[
+    {
+        "name": "c1",
+        "view": "example.views.MainPageView.MainPageView",
+        "controller": "example.controllers.MainPageController.MainPageController"
+    },
+    {
+        "name": "c2",
+        "view": "example.views.MainPageView.MainPageView",
+        "controller": "example.controllers.MainPageController.MainPageController"
+    },
+    {
+        "name": "c3",
+        "view": "example.views.TwoColumnView.TwoColumnView",
+        "controller": "example.controllers.TwoColumnController.TwoColumnController"
+    }
+]
