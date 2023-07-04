@@ -1,1 +1,1 @@
-cmd "/c activate base && python -m streamlit run test/app.py"
+cmd "/c activate base && python -m streamlit run example/app.py"

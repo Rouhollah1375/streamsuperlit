@@ -2,3 +2,8 @@ __pycache__/
 test.ipynb
 *.csv
 .vscode
+dist/
+eggs/
+*.egg-info/
+.installed.cfg
+*.egg
