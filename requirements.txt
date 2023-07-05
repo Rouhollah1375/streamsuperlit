@@ -1,5 +1,1 @@
-jdatetime
-streamlit==1.21.0
-protobuf==3.19.0
-streamlit-aggrid==0.3.3
-streamlit-autorefresh
+streamlit>=1.21.0
