@@ -1,0 +1,7 @@
+[
+    {
+        "name": "c3",
+        "view": "views.TwoColumnView.TwoColumnView",
+        "controller": "controllers.TwoColumnController.TwoColumnController"
+    }
+]

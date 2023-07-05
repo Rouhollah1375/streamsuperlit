@@ -8,41 +8,57 @@ from collections import OrderedDict
 import json
 import streamlit as st
 
-class SSTCore(Model):
-    SSTCORE_ID = 'sst-core'
-    def __new__(cls, components: list[dict]=None, components_json: str=None):
-        if SSTCore.SSTCORE_ID not in st.session_state:
-            st.session_state[SSTCore.SSTCORE_ID] = super(SSTCore, cls).__new__(cls, SSTCore.SSTCORE_ID)
+SSTCORE_ID = 'sst-core'         # TODO: Do not let any other object(view, components, etc. ) set this id for itself.
+
+class SSTCore:
+    def __new__(cls):
+        if SSTCore.get() is None:
+            st.session_state[SSTCORE_ID] = super(SSTCore, cls).__new__(cls)
             st.session_state['core-init'] = False
-        return st.session_state[SSTCore.SSTCORE_ID]
+        return SSTCore.get()
 
-    def __init__(self, components: list[dict]=None, components_json: str=None):
-        if components_json:
-            with open(components_json, 'r') as f:
-                components = json.load(f)
-
+    def __init__(self):
         if not st.session_state['core-init']:
-            self._components = OrderedDict()
             self._uuid = UUID()
-            self.build_components(components)
+            self._pages_components: dict[str, OrderedDict] = {}
             st.session_state['core-init'] = True
 
-        super().__init__(SSTCore.SSTCORE_ID)
+        super().__init__()
     
-    def create_component(self, name: str, view_cls: str, controller_cls: str):
+    @classmethod
+    def get(cls):
+        if SSTCORE_ID not in st.session_state:
+            return None
+        return st.session_state[SSTCORE_ID]
+
+    def _create_component(self, name: str, view_cls: str, controller_cls: str):
         id = self._uuid.get_uuid()
         try:
             view_class = get_class(view_cls)
             controller_class = get_class(controller_cls)
         except:
             raise Exception(f'Cannot create the component {name}. view_cls or controller_cls are not properly provided.')
-        self._components[id] = Component(name, id, view_class, controller_class)
+        return Component(name, id, view_class, controller_class), id
 
-    def build_components(self, components_desc: list[dict]):
+    def _build_components(self, components_desc: list[dict]):
+        components = OrderedDict()
         for comp in components_desc:
-            self.create_component(comp['name'], comp['view'], comp['controller'])
+            c, id = self._create_component(comp['name'], comp['view'], comp['controller'])
+            components[id] = c
+        return components
 
-    def render(self):
-        for id, comp in self._components.items():
+    def render_page(self, page_name: str, components: list[dict]=None, components_json: str=None):
+        if components_json:
+            with open(components_json, 'r') as f:
+                components = json.load(f)
+        if page_name in self._pages_components.keys():
+            built_comps = self._pages_components[page_name]
+        else:
+            built_comps = self._build_components(components)
+            self._pages_components[page_name] = built_comps
+            
+        for id, comp in self._pages_components[page_name].items():
             comp.get_view().render()
+
+        return self._pages_components[page_name]
 
