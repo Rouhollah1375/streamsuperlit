@@ -1,7 +1,8 @@
 from streamsuperlit.view import View
+from streamsuperlit.core.lifecycle_hook import AfterInit
 import streamlit as st
 
-class MainPageView(View):
+class MainPageView(View, AfterInit):
     def __new__(cls, id: str):
         return super(MainPageView, cls).__new__(cls, id)
 
@@ -11,6 +12,9 @@ class MainPageView(View):
         self.is_email = None
 
         super().__init__(id)
+
+    def after_init(self):
+        self._ctrl.get_df()
  
     def _view(self):
         st.title('Test page')
@@ -24,3 +28,4 @@ class MainPageView(View):
             st.write('email is correct')
         else:
             st.write('email is wrong')
+        st.dataframe(self._ctrl.get_df())
