@@ -1,5 +1,6 @@
 from streamsuperlit.view import View
 from streamsuperlit.controller import Controller
+from streamsuperlit.core.lifecycle_hook import OnInit, AfterInit
 import streamlit as st
 
 class Component:
@@ -19,6 +20,13 @@ class Component:
 
         self._view.register_controller(self._controller)
         self._controller.register_view(self._view)
+
+        OnInit.handle(self._controller)
+        OnInit.handle(self._view)
+
+        AfterInit.handle(self._controller)
+        AfterInit.handle(self._view)
+
 
     def get_view(self):
         return self._view

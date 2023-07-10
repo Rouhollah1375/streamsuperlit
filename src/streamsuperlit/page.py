@@ -1,7 +1,6 @@
 import streamlit as st
 from streamsuperlit.model.sst_core import SSTCore
 from streamsuperlit.component import Component
-from streamsuperlit.core.lifecycle import OnInit, OnCreate
 
 class Page:
     def __init__(self, name: str, components_list: list[dict]=None, components_json: str=None) -> None:
