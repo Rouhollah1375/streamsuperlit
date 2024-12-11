@@ -1,5 +1,4 @@
-from .core.sst import SSTCore
-from .page import Page
 from .view import View
+from .component import Component
 from .controller import Controller
-from .core.utils import navigate
+from .utils import navigate
