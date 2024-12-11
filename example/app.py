@@ -1,14 +1,16 @@
 import os, sys
-if str(os.getenv('SST_DEV')).strip() == '1':
-    os.system('pip uninstall -y streamsuperlit')       # removing the stable version
-    sys.path.append('../src')                      # adding the development version
 
-else:
-    os.system('pip uninstall -y streamsuperlit')       # removing the stable version
-    os.system('pip install -r requirements.txt')
+DEBUG = True
 
-from streamsuperlit.model import SSTCore
-from streamsuperlit.core.utils import navigate
+if __name__ == "__main__":
+    if DEBUG:
+        os.system('pip uninstall -y streamsuperlit')       # removing the stable version
+        sys.path.append('../src')                          # adding the development version
+    else:
+        os.system('pip uninstall -y streamsuperlit')       # reinstalling the stable version
+        os.system('pip install -r requirements.txt')       # reinstalling the stable version
 
-sst = SSTCore()
-navigate('mainpage')
+    from streamsuperlit import SSTCore, navigate
+
+    sst = SSTCore()
+    navigate('mainpage')

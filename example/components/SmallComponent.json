@@ -1,0 +1,7 @@
+[
+    {
+        "name": "small-cmp",
+        "view": "views.SmallView.SmallView",
+        "controller": "controllers.SmallController.SmallController"
+    }
+]
