@@ -1,5 +1,5 @@
 import streamlit as st
-from streamsuperlit.model.sst_core import SSTCore
+from streamsuperlit.core.sst import SSTCore
 from streamsuperlit.component import Component
 
 class Page:

@@ -1,4 +1,3 @@
-from streamsuperlit.model import Model
 from streamsuperlit.view import View
 from streamsuperlit.controller import Controller
 from streamsuperlit.component import Component
