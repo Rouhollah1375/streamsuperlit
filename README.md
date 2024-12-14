@@ -1,10 +1,10 @@
-# StreamSuperLit
+# 🚀 StreamSuperLit 🚀
 
-## 🚀 Introduction 🚀
+## 💡Introduction 
 
-Welcome to 🌟**StreamSuperLit**🌟 — a game-changer extention for your [Streamlit](https://streamlit.io/) apps! If you've ever found yourself wrestling with the chaos of unstructured Streamlit apps, and the frustration of losing object states when using [Streamlit Autorefresh](https://github.com/kmcgrady/streamlit-autorefresh) or after every user interaction, then you're in the right place! 🎯
+Welcome to **StreamSuperLit** — a game-changer extention for your [Streamlit](https://streamlit.io/) apps! If you've ever found yourself wrestling with the chaos of unstructured Streamlit apps, and the frustration of losing object states when using [Streamlit Autorefresh](https://github.com/kmcgrady/streamlit-autorefresh) or after every user interaction, then you're in the right place! 
 
-💡 With **StreamSuperLit**, we’re taking Streamlit to the next level:
+With **StreamSuperLit**, we’re taking Streamlit to the next level:
 - 💼 **Bring Order to Chaos**: StreamSuperLit provides a clear, modular structure to organize your dashboard app. So, you can focus on building, not debugging. The familiar **View+Controller** structure utilized in StreamSuperLit's components is by no means limiting. Contrarily, it acts as a guideline for you to develop your app more productively.
 
 
@@ -26,7 +26,7 @@ Thinking about compatiblity? StreamSuperLit is just an extention on the Streamli
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/streamsuperlit.git
+   git clone https://github.com/Rouhollah1375/streamsuperlit.git
    cd streamsuperlit
    ```
 
@@ -39,7 +39,7 @@ Thinking about compatiblity? StreamSuperLit is just an extention on the Streamli
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/streamsuperlit.git
+   git clone https://github.com/Rouhollah1375/streamsuperlit.git
    cd streamsuperlit
    ```
 
@@ -78,7 +78,7 @@ example_comp = Component(name=comp_name,
 
 Notice that for `view_cls` and `controller_cls`, we pass the reference to the <u>*classes*</u>, and not the actual objects. The view and controller objects will be instantiated by the component internally. Also, note that be calling the component object directly (i.e. `__call__`), the component will be rendered. This is the way we ultimately use our components.
 
-⚠️ ***Also, the `id` argument passed to the `Component`'s constructor must be a unique string across all ids in the app.*** ⚠️
+⚠️ ***Also, the `id` argument passed to the `Component`'s constructor must be a unique string across all ids in the app.*** 
 
 ### 2. Controller
 Controller is an essential part of every StreamSuperLit `Component`. A controller, as its name suggests, controlls the behavior of its component. For example, a controller defines what should happend when a button in the component's view is clicked. The state of the component is also defined in the controller that can be manipulated based on different events. The most important aspect of a controller is the fact that its state is preserved across streamlit reruns.
@@ -141,34 +141,33 @@ In the above example, notice a few things:
 When creating a component, it is quite common that you wish to initialize some parameters and define state variables. For that, you can use lifecycle hooks from `streamsuperlit.lifecycle_hook` module. These hooks can be attatched to views and controllers and there are currently two hooks implemented in the package:
 
 - `OnInit.on_init` method: If implemented by the view/controller class, it will be invoked during the component's initialization. This method will be invoked only once and never across reruns. If both the view and the controller of a component implement this method, controller takes precedence over view.
-<br>
-*<u>This method is generally a good place to initialize your component's state.</u>*
+<u>This method is generally a good place to initialize your component's state.</u>
 
 - `AfterInit.after_init` method:  If implemented, it will be invoked after the return of `on_init` on both view and controller. This method will also be invoked only once and never across reruns. If both the view and the controller of a component implement this method, controller takes precedence over view.
 ### 5. <a id="putting-it-together"></a> Putting It Together
-<div style="display:inline; width: fit-content;margin:0;padding:0;"><p style="display: inline">Now, let's put it all together and create a great StreamSuperLit component! </p>💪😎<p style="transform: scale(-1, 1); width: fit-content; display:inline-block;">💪</p></div>
+<div style="display:inline; width: fit-content;margin:0;padding:0;"><p style="display: inline">Now, let's put it all together and create a great StreamSuperLit component! 😎
 
 To attach these hooks, the view/controller needs to inherit the hook class and implement the hook method like [this example](#example-controller).
 
 1. Create a directory for your app. I call it `sst_app`. Create the following structure for your project. Of course, this is a recommended structure for large projects (which is inspired by font-end frameworks like [Angular](https://angular.dev)). You can always squeeze everything into just one `app.py`!
 
 
-```
-sst_app/
-├── components/                    # This directory holds all components
-│   ├── component_one/             # Component directory
-│   |   ├── __init__.py            # Component creation is here
-│   |   ├── component_one_view.py  # Component's view
-│   |   ├── component_one_ctrl.py  # Component's controller
-│   ├── component_two/             # You can have multiple components
-│   ├── ***
-├── pages/                         # Streamlit pages
-│   ├── page_one.py                # Here, you can use your components and display them
-│   ├── page_two.py                # You can have multiple pages
-│   ├── ***
-└── app.py                         # The entrypoint to the app
+    ```
+    sst_app/
+    ├── components/                    # This directory holds all components
+    │   ├── component_one/             # Component directory
+    │   |   ├── __init__.py            # Component creation is here
+    │   |   ├── component_one_view.py  # Component's view
+    │   |   ├── component_one_ctrl.py  # Component's controller
+    │   ├── component_two/             # You can have multiple components
+    │   ├── ***
+    ├── pages/                         # Streamlit pages
+    │   ├── page_one.py                # Here, you can use your components and display them
+    │   ├── page_two.py                # You can have multiple pages
+    │   ├── ***
+    └── app.py                         # The entrypoint to the app
 
-```
+    ```
 2. Let's create one component inside `sst_app/components/component_one/`
     
     - Define the controller like [the above example](#example-controller) in `component_one_ctrl.py`
@@ -224,7 +223,7 @@ sst_app/
 
 <hr style="margin-top: 50px; opacity:0;"/>
 
-## 🛠️ Behind the Scene
+## <a id="behind-the-scene"></a> 🛠️ Behind the Scene
 ### Project Structure
 
 ```
@@ -320,10 +319,10 @@ As you can see here, the trick actually lies within the implementation of `__new
 
 ## ⭐ Don't Forget to Star!
 
-If you like this project, please show your support by giving it a **star** on [GitHub](https://github.com/username/streamsuperlit)! 🌟  
+If you like this project, please show your support by giving it a **star** on [GitHub](https://github.com/Rouhollah1375/streamsuperlit)! 🌟  
 Your appreciation keeps me motivated to bring more awesome features to life. 💪  
 
-👉 [Star the project](https://github.com/username/streamsuperlit) and join the journey!
+👉 [Star the project](https://github.com/Rouhollah1375/streamsuperlit) and join the journey!
 
 
 ## 🤝 Contribution
@@ -341,9 +340,4 @@ We welcome contributions! To contribute:
 ## 📫 Contact
 
 For questions, suggestions, or feedback, please open an issue or contact [roohi.abol@gmail.com](mailto:roohi.abol@gmail.com).
-## 📝 License
-
-This project is licensed under the [MIT License](LICENSE.txt).
-
----
 
