@@ -24,29 +24,11 @@ Thinking about compatiblity? StreamSuperLit is just an extention on the Streamli
 
 ### Install using pip:
 
-1. Clone the repository:
    ```bash
-   git clone https://github.com/Rouhollah1375/streamsuperlit.git
-   cd streamsuperlit
+   $ pip install streamlit
+   $ pip install git+https://github.com/Rouhollah1375/streamsuperlit.git
    ```
 
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### Install using the GitHub repository:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Rouhollah1375/streamsuperlit.git
-   cd streamsuperlit
-   ```
-
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
 
 ## Quick Start
 In this section, you will quickly learn StreamSuperLit's concepts and how to rewrite your streamlit pages in a modularized reusable way. Let's get started! 😎
